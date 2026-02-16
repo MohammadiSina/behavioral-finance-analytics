@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@apollo/server": "^4.12.2",
+    "@apollo/server": "^4.13.0",
     "@as-integrations/express5": "^1.1.2",
     "@bull-board/api": "^6.15.0",
     "@bull-board/express": "^6.15.0",
@@ -40,8 +40,7 @@
     "@nestjs/platform-express": "^11.1.9",
     "@nestjs/schedule": "^6.1.0",
     "@prisma/client": "6.19.1",
-    "prisma": "^6.19.1",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "bcrypt": "^6.0.0",
     "bullmq": "^5.66.1",
     "cache-manager": "^7.2.7",
@@ -53,13 +52,14 @@
     "openai": "^5.23.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "prisma": "^6.19.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
-    "@nestjs/cli": "^11.0.14",
+    "@nestjs/cli": "^11.0.16",
     "@nestjs/schematics": "^11.0.9",
     "@nestjs/testing": "^11.1.9",
     "@swc/cli": "^0.6.0",
@@ -84,6 +84,12 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.50.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@isaacs/brace-expansion": "5.0.1",
+      "lodash": "4.17.23"
+    }
   },
   "jest": {
     "moduleFileExtensions": [
