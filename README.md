@@ -59,6 +59,43 @@ pnpm run start:dev
 - `pnpm run start:dev` - Development server with hot reload
 - `pnpm run test` - Run test suite
 
+### Docker Compose
+
+Run the full stack (app + MySQL + Redis) with Docker Compose.
+
+**1. Create secret files**
+
+The compose setup uses Docker secrets for sensitive values. Create a `secrets/` directory and add one value per file:
+
+```bash
+mkdir -p secrets
+echo 'your-db-password'       > secrets/db-password.secret.txt
+echo 'your-db-root-password'  > secrets/db-root-password.secret.txt
+echo 'your-jwt-secret-min-32' > secrets/jwt-secret.secret.txt
+echo 'sk-proj-your-key'       > secrets/openai-api-key.secret.txt
+```
+
+> These files are git-ignored. Never commit them.
+
+**2. Build the image**
+
+```bash
+docker build -t ebraz:0.0.0 .
+```
+
+**3. Start the stack**
+
+```bash
+docker compose up
+```
+
+This starts three containers:
+- **ebraz-app** — the NestJS application on port `3000`
+- **ebraz-mysql** — MySQL 8.0 with persistent data volume
+- **ebraz-redis** — Redis with AOF persistence
+
+Prisma migrations run automatically on each app start. Non-secret environment variables (port, Redis URL, cache TTL, etc.) are configured directly in `docker-compose.yaml`.
+
 
 ## 🔮 Future Roadmap
 
