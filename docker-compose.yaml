@@ -1,0 +1,95 @@
+name: ebraz-compose
+
+services:
+  ebraz-app:
+    image: ebraz:0.0.0
+    container_name: ebraz-app
+    ports:
+      - '3000:3000'
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # env_file:
+    #   - ./env/app.env
+    secrets:
+      - db_password
+      - jwt_secret
+      - openai_api_key
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      REDIS_URL: redis://redis:6379
+      REDIS_CACHE_TTL: 1800000
+      JWT_EXPIRES_IN: 10m
+      OPENAI_MODEL: gpt-4o-mini
+    # Bridge Docker secret files → env vars, run migrations, then start the app
+    command: >
+      sh -c '
+        export DATABASE_URL="mysql://ebraz:$$(cat /run/secrets/db_password)@mysql:3306/ebraz_finance" &&
+        export JWT_SECRET=$$(cat /run/secrets/jwt_secret) &&
+        export OPENAI_API_KEY=$$(cat /run/secrets/openai_api_key) &&
+        node_modules/.bin/prisma migrate deploy &&
+        exec node dist/main.js
+      '
+    networks:
+      - ebraz-net
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0.44-debian
+    container_name: ebraz-mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ebraz_finance
+      MYSQL_USER: ebraz
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets:
+      - db_password
+      - db_root_password
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - ebraz-net
+    restart: unless-stopped
+
+  redis:
+    image: redis:8.2.4-alpine
+    container_name: ebraz-redis
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - ebraz-net
+    restart: unless-stopped
+
+networks:
+  ebraz-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  redis_data:
+
+secrets:
+  db_password:
+    file: ./secrets/db-password.secret.txt
+  db_root_password:
+    file: ./secrets/db-root-password.secret.txt
+  jwt_secret:
+    file: ./secrets/jwt-secret.secret.txt
+  openai_api_key:
+    file: ./secrets/openai-api-key.secret.txt

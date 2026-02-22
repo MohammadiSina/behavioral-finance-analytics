@@ -20,6 +20,12 @@ coverage
 .env.*.local
 !.env.example
 
+# docker compose secrets
+secrets
+.secrets
+secrets/*.txt
+**/*.secret.txt
+
 # IDE
 .vscode
 .idea

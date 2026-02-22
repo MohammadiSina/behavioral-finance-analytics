@@ -1,4 +1,3 @@
-import { join } from 'node:path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -21,7 +20,7 @@ import { envValidationSchema } from './configs/env-validation.schema';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, validationSchema: envValidationSchema, validatePredefined: false }),
+    ConfigModule.forRoot({ isGlobal: true, validationSchema: envValidationSchema }),
     ScheduleModule.forRoot(),
     CacheModule.register({
       isGlobal: true,
@@ -32,7 +31,7 @@ import { envValidationSchema } from './configs/env-validation.schema';
     BullBoardModule.forRoot({ route: '/bull-board', adapter: ExpressAdapter }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: true,
       graphiql: true,
     }),
     CommonModule,
