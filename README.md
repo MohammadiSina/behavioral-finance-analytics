@@ -1,33 +1,41 @@
-# Ebraz: AI-Powered Emotional Finance Tracker
+# Behavioral Finance Analytics
 
-> **Personal finance through emotional intelligence and AI-driven insights**
+> **An AI-powered behavioral finance platform that transforms financial activity into actionable behavioral insights and personalized coaching.**
 
-**Ebraz** is a cutting-edge personal finance application that bridges the gap between financial data and emotional well-being. Unlike traditional budgeting apps that focus solely on numbers, Ebraz leverages artificial intelligence to understand the *emotional context* behind every financial decision, helping users build healthier relationships with money.
+**Ebraz** is a behavioral finance analytics platform that bridges the gap between transactional data, emotional context, and financial decision-making. Traditional finance applications focus on recording expenses and categorizing transactions. Ebraz goes further by analyzing *why* people spend the way they do, identifying behavioral patterns, emotional triggers, and spending tendencies to help users build healthier financial habits.
 
-## 🌟 The Problem Ebraz Solved
+By combining financial activity with emotional signals and large language models, Ebraz generates personalized coaching and behavioral insights tailored to each user's financial context.
 
-Traditional finance apps treat money as purely transactional. But spending is deeply emotional—driven by stress, joy, impulse, or necessity. **Ebraz** recognizes this reality and provides:
+## 🌟 The Problem Ebraz Solves
 
-- **Emotional Intelligence**: Track not just *what* you spent, but *how it made you feel*
-- **AI-Powered Insights**: Monthly personalized coaching powered by OpenAI's advanced language models
-- **Behavioral Pattern Recognition**: Identify emotional spending triggers and financial habits
-- **Culturally-Aware Analysis**: Designed with Iranian economic realities in mind (inflation, currency fluctuations)
+Most personal finance applications assume that financial decisions are rational and purely transactional. In reality, spending behavior is often influenced by stress, satisfaction, urgency, habits, cultural context, and impulse.
 
-## 🚀 Key Features
+Ebraz addresses this gap by providing:
 
-- **Multi-Currency Support**: Real-time IRT ↔ USD exchange rates via BitPin API
-- **Emotional Finance Tracking**: Tag transactions with emotions (Regret, Satisfaction, Stress, etc.)
-- **AI-Powered Insights**: Monthly personalized financial coaching with cultural sensitivity
-- **Comprehensive Analytics**: Spending breakdowns by emotion, intent, and category
-- **GraphQL API**: Type-safe, efficient data querying with JWT authentication
+* **Behavioral Finance Analytics:** Analyze how emotions, intentions, and habits shape financial decisions.
+* **AI-Generated Coaching:** Deliver personalized monthly guidance powered by OpenAI models.
+* **Pattern Recognition:** Identify recurring emotional triggers and spending behaviors over time.
+* **Context-Aware Analysis:** Incorporate regional financial realities such as inflation and currency fluctuations.
+* **Decision Intelligence:** Transform raw transaction records into meaningful behavioral insights.
 
-## 📊 Analytics & Reporting
+## 🚀 Key Capabilities
 
-- **Net Balance Analysis**: Income vs. expense tracking with currency conversion
-- **Emotional Spending Patterns**: Breakdown by emotion categories and percentages
-- **Intent Analysis**: Planned vs. impulsive spending insights
-- **Category Spending**: Detailed breakdown across 18+ spending categories
-- **AI-Generated Insights**: Monthly personalized financial coaching reports
+* Multi-currency financial tracking with real-time exchange rates
+* Emotional tagging for financial activities
+* AI-generated financial coaching reports
+* Behavioral and intent-based spending analysis
+* Comprehensive analytics across categories and emotional dimensions
+* GraphQL API with JWT authentication
+* Background processing for AI workloads using BullMQ
+
+## 📊 Analytics & Intelligence
+
+* Net balance and cash flow analysis
+* Emotional spending distribution and trend detection
+* Planned versus impulsive spending analysis
+* Category-level financial behavior analytics
+* Monthly AI-generated coaching reports
+* Longitudinal behavioral pattern recognition
 
 ## 🛠️ Tech Stack
 
